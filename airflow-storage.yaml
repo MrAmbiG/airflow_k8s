@@ -1,0 +1,29 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: airflow2-pv-volume
+  labels:
+    type: local
+    app: airflow2
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/k8s_persistanat_data/airflow2"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: airflow2-pv-claim
+  labels:
+    app: airflow2
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
