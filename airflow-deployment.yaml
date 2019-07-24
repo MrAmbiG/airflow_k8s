@@ -1,28 +1,57 @@
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+# apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+# kind: Deployment
+# metadata:
+#     name: airflow-deployment
+#     labels:
+#         app: airflow2
+# spec:
+#     replicas: 2
+#     selector:
+#         matchLabels:
+#         app: airflow
+#     template:
+#         metadata:
+#             labels:
+#                 app: airflow2
+#     spec:
+#         containers:
+#         -   name: airflow2
+#             image: puckel/docker-airflow
+#             ports:
+#             -   containerPort: 8080
+#             volumeMounts:
+#                 -   name: airflow-persistent-storage
+#                     mountPath: /var/lib/airflow
+#         volumes:
+#             -   name: airflow-persistent-storage
+#                 persistentVolumeClaim:
+#                     claimName: airflow-pvc
+
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: airflow-deployment
-    labels:
-        app: airflow2
+  name: airflow2-deployment
+  labels:
+    app: airflow2
 spec:
-    replicas: 2
-    selector:
-        matchLabels:
-        app: airflow
-    template:
-        metadata:
-            labels:
-                app: airflow2
+  replicas: 3
+  selector:
+    matchLabels:
+      app: airflow2
+  template:
+    metadata:
+      labels:
+        app: airflow2
     spec:
-        containers:
-        -   name: airflow2
-            image: puckel/docker-airflow
-            ports:
-            -   containerPort: 8080
-            volumeMounts:
-                -   name: airflow-persistent-storage
-                    mountPath: /var/lib/airflow
-        volumes:
-            -   name: airflow-persistent-storage
-                persistentVolumeClaim:
-                    claimName: airflow-pvc
+      containers:
+      - name: airflow2
+        image: puckel/docker-airflow
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+            - name: airflow-persistent-storage
+              mountPath: /var/lib/airflow
+      volumes:
+      - name: airflow-persistent-storage
+        persistentVolumeClaim:
+          claimName: airflow-pv-claim
