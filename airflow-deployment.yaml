@@ -1,0 +1,28 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+    name: airflow-deployment
+    labels:
+        app: airflow
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+        app: airflow
+    template:
+        metadata:
+            labels:
+                app: mysql
+    spec:
+        containers:
+        -   name: airflow
+            image: puckel/docker-airflow
+            ports:
+            -   containerPort: 8080
+            volumeMounts:
+                -   name: airflow-persistent-storage
+                    mountPath: /var/lib/airflow
+        volumes:
+            -   name: airflow-persistent-storage
+            persistentVolumeClaim:
+                claimName: airflow-pvc
