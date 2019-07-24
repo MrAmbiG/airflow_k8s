@@ -34,7 +34,7 @@ metadata:
   labels:
     app: airflow2
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: airflow2
@@ -54,4 +54,4 @@ spec:
       volumes:
       - name: airflow-persistent-storage
         persistentVolumeClaim:
-          claimName: airflow-pv-claim
+          claimName: airflow-pvc
