@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
     name: airflow-deployment
     labels:
-        app: airflow
+        app: airflow2
 spec:
     replicas: 2
     selector:
@@ -12,10 +12,10 @@ spec:
     template:
         metadata:
             labels:
-                app: mysql
+                app: airflow2
     spec:
         containers:
-        -   name: airflow
+        -   name: airflow2
             image: puckel/docker-airflow
             ports:
             -   containerPort: 8080
