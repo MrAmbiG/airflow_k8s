@@ -16,13 +16,12 @@ spec:
     spec:
       containers:
       - name: airflow
-        image: puckel/docker-airflow
+        image: gajuambi/airflow-centos7
         ports:
         - containerPort: 8080
         volumeMounts:
             - name: airflow-persistent-storage
-              # mountPath: /var/lib/airflow
-              mountPath: /usr/local/airflow/
+              mountPath: /opt/app-root/src/airflow
       volumes:
       - name: airflow-persistent-storage
         persistentVolumeClaim:
