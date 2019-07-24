@@ -3,7 +3,7 @@
 # metadata:
 #     name: airflow-deployment
 #     labels:
-#         app: airflow2
+#         app: airflow
 # spec:
 #     replicas: 2
 #     selector:
@@ -12,10 +12,10 @@
 #     template:
 #         metadata:
 #             labels:
-#                 app: airflow2
+#                 app: airflow
 #     spec:
 #         containers:
-#         -   name: airflow2
+#         -   name: airflow
 #             image: puckel/docker-airflow
 #             ports:
 #             -   containerPort: 8080
@@ -30,28 +30,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: airflow2-deployment
+  name: airflow-deployment
   labels:
-    app: airflow2
+    app: airflow
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: airflow2
+      app: airflow
   template:
     metadata:
       labels:
-        app: airflow2
+        app: airflow
     spec:
       containers:
-      - name: airflow2
+      - name: airflow
         image: puckel/docker-airflow
         ports:
         - containerPort: 8080
         volumeMounts:
-            - name: airflow2-persistent-storage
+            - name: airflow-persistent-storage
               mountPath: /var/lib/airflow
       volumes:
-      - name: airflow2-persistent-storage
+      - name: airflow-persistent-storage
         persistentVolumeClaim:
-          claimName: airflow2-pvc
+          claimName: airflow-pvc
