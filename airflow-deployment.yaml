@@ -50,7 +50,8 @@ spec:
         - containerPort: 8080
         volumeMounts:
             - name: airflow-persistent-storage
-              mountPath: /var/lib/airflow
+              # mountPath: /var/lib/airflow
+              mountPath: /usr/local/airflow/
       volumes:
       - name: airflow-persistent-storage
         persistentVolumeClaim:
