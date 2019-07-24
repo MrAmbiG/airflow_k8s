@@ -52,6 +52,6 @@ spec:
             - name: airflow-persistent-storage
               mountPath: /var/lib/airflow
       volumes:
-      - name: airflow-persistent-storage
+      - name: airflow2-persistent-storage
         persistentVolumeClaim:
-          claimName: airflow-pvc
+          claimName: airflow2-pvc
